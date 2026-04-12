@@ -243,7 +243,6 @@ aihub
 | `aihub hardware-scan` | Run hardware diagnostics and see recommended models |
 | `aihub history <model>` | Browse chat history for a specific model (required) |
 | `aihub config` | Show configuration file path and current settings |
-| `aihub tui` | Launch full-screen Textual TUI interface |
 
 ### Interactive Menu Options
 When running `aihub`, you'll see an interactive menu with:
