@@ -57,26 +57,30 @@ Enable in config: `global_memory_enabled: true`
 1. **System Prompt Injection**: Memory content is automatically injected as a system prompt at the start of each chat session
 2. **Auto-Extraction**: AIHub can automatically summarize and save important information from your current chat session to memory
 
-#### Auto-Extraction Commands
-During chat, use these commands to extract and save information:
+#### Memory Slash-Commands
+During chat, use these commands to manage memory:
 
 | Command | Description |
 |---------|-------------|
 | `/memory` | View current memory for this model |
 | `/memory save <key> <value>` | Save a specific fact manually |
 | `/memory clear` | Clear all memory for current model |
-| `/extract` | Auto-summarize current session and save to **model memory** |
-| `/extract global` | Auto-summarize current session and save to **global memory** |
+| `/memoryadd global` | Auto-extract key facts from chat to **global memory** |
+| `/memoryadd chat` | Auto-extract key facts from chat to **model memory** |
+| `/history` | Browse and resume past sessions |
+| `/tools` | List available agentic tools |
+| `/clear` | Clear the current chat context (start fresh) |
+| `exit` / `quit` / `q` | End the chat session |
 
-#### How Auto-Extraction Works
-When you use `/extract` or `/extract global`:
+#### How Auto-Extraction Works (`/memoryadd`)
+When you use `/memoryadd chat` or `/memoryadd global`:
 
 1. **Collection**: AIHub collects the last 15 messages from your current chat session
 2. **Analysis**: It sends these messages to your currently active local Ollama model with a special prompt asking it to extract key facts, user preferences, and important information
 3. **Summarization**: The model analyzes the conversation and creates a clean Markdown list of the most important points
 4. **Saving**: The extracted facts are saved to either:
-   - **Model memory**: `~/.aihub/memory/<model_name>.md` (using `/extract`)
-   - **Global memory**: `~/.aihub/memory/global.md` (using `/extract global`)
+   - **Model memory**: `~/.aihub/memory/<model_name>.md` (using `/memoryadd chat`)
+   - **Global memory**: `~/.aihub/memory/global.md` (using `/memoryadd global`)
 5. **Timestamp**: Each extraction is tagged with a timestamp, so previous memories are preserved
 
 This allows the model to "remember" your preferences, project context, and other important details across future sessions.
@@ -232,12 +236,14 @@ aihub
 | Command | Description |
 |---------|-------------|
 | `aihub` | Launch main interactive menu |
-| `aihub chat` | Start interactive chat session with a model |
+| `aihub chat` | Start interactive chat session (shows model selector) |
+| `aihub chat <model>` | Start chat with specific model |
 | `aihub models-list` | List all available models with hardware compatibility |
 | `aihub models-download <name>` | Download a model via Ollama |
 | `aihub hardware-scan` | Run hardware diagnostics and see recommended models |
-| `aihub history <model>` | Browse chat history for a specific model |
+| `aihub history <model>` | Browse chat history for a specific model (required) |
 | `aihub config` | Show configuration file path and current settings |
+| `aihub tui` | Launch full-screen Textual TUI interface |
 
 ### Interactive Menu Options
 When running `aihub`, you'll see an interactive menu with:
