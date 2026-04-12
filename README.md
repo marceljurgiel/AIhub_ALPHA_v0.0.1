@@ -55,11 +55,38 @@ Enable in config: `global_memory_enabled: true`
 
 #### How Memory Works
 1. **System Prompt Injection**: Memory content is automatically injected as a system prompt at the start of each chat session
-2. **Auto-Extraction**: Tell the model "add this conversation to your memory" and it will extract key facts using AI
-3. **Slash Commands** (available during chat):
-   - `/memory` - View current memory
-   - `/memory save <key> <value>` - Save a specific fact
-   - `/memory clear` - Clear all memory for current model
+2. **Auto-Extraction**: AIHub can automatically summarize and save important information from your current chat session to memory
+
+#### Auto-Extraction Commands
+During chat, use these commands to extract and save information:
+
+| Command | Description |
+|---------|-------------|
+| `/memory` | View current memory for this model |
+| `/memory save <key> <value>` | Save a specific fact manually |
+| `/memory clear` | Clear all memory for current model |
+| `/extract` | Auto-summarize current session and save to **model memory** |
+| `/extract global` | Auto-summarize current session and save to **global memory** |
+
+#### How Auto-Extraction Works
+When you use `/extract` or `/extract global`:
+
+1. **Collection**: AIHub collects the last 15 messages from your current chat session
+2. **Analysis**: It sends these messages to your currently active local Ollama model with a special prompt asking it to extract key facts, user preferences, and important information
+3. **Summarization**: The model analyzes the conversation and creates a clean Markdown list of the most important points
+4. **Saving**: The extracted facts are saved to either:
+   - **Model memory**: `~/.aihub/memory/<model_name>.md` (using `/extract`)
+   - **Global memory**: `~/.aihub/memory/global.md` (using `/extract global`)
+5. **Timestamp**: Each extraction is tagged with a timestamp, so previous memories are preserved
+
+This allows the model to "remember" your preferences, project context, and other important details across future sessions.
+
+#### Manual Memory Management
+You can also manually edit memory files directly:
+```
+~/.aihub/memory/llama3.2:3b.md    # Model-specific memory
+~/.aihub/memory/global.md         # Shared global memory
+```
 
 #### Memory File Format
 ```markdown
@@ -116,8 +143,8 @@ Insert screenshots here showing AIHub in action:
 ### Linux Quick Install
 
 ```bash
-git clone https://github.com/marceljurgiel/AIhub_ALPHA_v0.0.1.git
-cd AIhub_ALPHA_v0.0.1
+git clone https://github.com/marceljurgiel/AIhub.git
+cd AIhub
 ./install.sh
 ```
 
@@ -131,8 +158,8 @@ The installer will:
 
 ```bash
 # Clone the repository
-git clone https://github.com/marceljurgiel/AIhub_ALPHA_v0.0.1.git
-cd AIhub_ALPHA_v0.0.1
+git clone https://github.com/marceljurgiel/AIhub.git
+cd AIhub
 
 # Create virtual environment (optional but recommended)
 python -m venv venv
@@ -155,8 +182,8 @@ pip install -e .
 
 ```powershell
 # Clone the repository
-git clone https://github.com/marceljurgiel/AIhub_ALPHA_v0.0.1.git
-cd AIhub_ALPHA_v0.0.1
+git clone https://github.com/marceljurgiel/AIhub.git
+cd AIhub
 
 # Create virtual environment
 python -m venv venv
