@@ -4,7 +4,9 @@
 
 **Your all-in-one local AI management platform.**
 
-AIHub is a unified interface for managing, browsing, and chatting with local and API-based AI models. It provides hardware-aware model selection, persistent memory, and a tool-calling agentic system.
+AIHub is a unified interface for managing, browsing, and chatting with local AI models. It provides hardware-aware model selection, persistent memory, and a tool-calling agentic system.
+
+> **Note:** API integration (OpenAI, Anthropic, Google) is currently in development and not available in this version.
 
 [![Python 3.9+](https://img.shields.io/badge/Python-3.9+-blue.svg)](https://www.python.org/)
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
@@ -22,9 +24,8 @@ Automatically detects your system hardware and recommends models that fit:
 - **Inference speed estimator**: Heuristic tokens/sec based on detected VRAM
 
 ### Model Browser & Registry
-- **55+ models** in built-in registry (chat, code, reasoning models)
+- **104 models** in built-in registry (chat, code, reasoning models)
 - **Live Ollama integration**: Shows locally installed models
-- **HuggingFace browsing**: Fetch and browse remote models
 - **Hardware-aware sorting**: Installed models first, then sorted by VRAM fit
 - **Capability badges**: Tool Calling, Code, Reasoning, Multilingual, etc.
 - **Category filters**: Small / Medium / Large / XLarge
@@ -36,10 +37,42 @@ Automatically detects your system hardware and recommends models that fit:
 - **Temperature control**: Adjust model creativity
 
 ### Memory System
-- **Per-model memory**: Stores key facts in `~/.aihub/memory/<model>.md`
-- **Global memory**: Shared across all models in `~/.aihub/memory/global.md`
-- **Auto-extraction**: Automatically extracts facts from conversations
-- **System prompt injection**: Memory injected as context for each session
+AIHub provides a powerful memory system that allows models to "remember" information across sessions.
+
+#### Per-Model Memory
+Each model has its own memory file stored at:
+```
+~/.aihub/memory/<model_name>.md
+```
+Memory is stored as human-readable Markdown, making it easy to view and edit directly.
+
+#### Global Memory
+A shared memory that applies to all models:
+```
+~/.aihub/memory/global.md
+```
+Enable in config: `global_memory_enabled: true`
+
+#### How Memory Works
+1. **System Prompt Injection**: Memory content is automatically injected as a system prompt at the start of each chat session
+2. **Auto-Extraction**: Tell the model "add this conversation to your memory" and it will extract key facts using AI
+3. **Slash Commands** (available during chat):
+   - `/memory` - View current memory
+   - `/memory save <key> <value>` - Save a specific fact
+   - `/memory clear` - Clear all memory for current model
+
+#### Memory File Format
+```markdown
+<!-- AIHub Memory File — model: llama3.2:3b | created: 2026-04-12 -->
+
+## User Preferences
+- Prefers concise answers
+- Likes code examples
+
+## Project Context
+- Working on Python CLI tool
+- Using FastAPI framework
+```
 
 ### Tool-Calling Agentic System
 AIHub provides 6 built-in tools for agentic workflows:
@@ -54,11 +87,27 @@ Tools work with Ollama models that support function calling (e.g., llama3.2:3b, 
 - **Persistent sessions**: Save and resume chat sessions
 - **Per-model history**: Organized by model name
 - **Configurable limits**: Max saved sessions per model
+- **Session browser**: Browse and load past conversations
 
 ### Multi-Platform Support
 - **Linux**: Full support with all GPU detection methods
 - **Windows**: WMI-based GPU detection
 - **Cross-platform**: Portable config at `~/.aihub/config.yaml`
+
+---
+
+## Screenshots
+
+<!-- 
+Insert screenshots here showing AIHub in action:
+- Main menu
+- Model browser
+- Hardware scan output
+- Chat session with tools
+- Memory management
+-->
+
+*Screenshots coming soon - add your own screenshots to this section!*
 
 ---
 
@@ -155,13 +204,23 @@ aihub
 
 | Command | Description |
 |---------|-------------|
-| `aihub` | Launch main menu |
-| `aihub chat` | Start quick chat session |
-| `aihub models-list` | List all available models |
-| `aihub models-download` | Download a model via Ollama |
-| `aihub hardware-scan` | Run hardware diagnostics |
-| `aihub history` | Browse saved chat sessions |
-| `aihub config` | Show current configuration |
+| `aihub` | Launch main interactive menu |
+| `aihub chat` | Start interactive chat session with a model |
+| `aihub models-list` | List all available models with hardware compatibility |
+| `aihub models-download <name>` | Download a model via Ollama |
+| `aihub hardware-scan` | Run hardware diagnostics and see recommended models |
+| `aihub history <model>` | Browse chat history for a specific model |
+| `aihub config` | Show configuration file path and current settings |
+
+### Interactive Menu Options
+When running `aihub`, you'll see an interactive menu with:
+1. **Browse & Manage Models** - View, filter, and download models
+2. **Start Chat** - Begin a new chat session
+3. **Chat History** - Resume past conversations
+4. **Memory Management** - View/edit memory for models
+5. **Hardware Scan** - View system diagnostics
+6. **Configuration** - Edit settings
+7. **Exit** - Close the application
 
 ---
 
@@ -170,7 +229,7 @@ aihub
 AIHub stores config at `~/.aihub/config.yaml`:
 
 ```yaml
-# API Settings
+# API Settings (in development - not functional yet)
 ollama_api_url: http://localhost:11434
 openai_api_key: your-key-here
 anthropic_api_key: your-key-here
@@ -201,27 +260,6 @@ max_history_sessions: 50
 
 ---
 
-## Model Registry
-
-AIHub includes a built-in registry with 55+ models across categories:
-
-### Small Models (< 4GB VRAM)
-- `llama3.2:1b` - Tiny, ultra-fast, 128k context
-- `llama3.2:3b` - Compact with tool calling
-- `qwen2.5:3b` - Code-capable, fast
-
-### Medium Models (4-8GB VRAM)
-- `llama3.1:8b` - General purpose, tool calling
-- `qwen2.5:7b` - Code, fast
-- `mistral:7b` - Multilingual
-
-### Large Models (8GB+ VRAM)
-- `llama3.1:70b` - Full-size, reasoning
-- `qwen2.5:14b` - Code, agentic
-- `deepseek-r1:7b` - Reasoning model
-
----
-
 ## Tool Calling Usage
 
 To use tools (web search, terminal, file ops), select a model with tool calling capability:
@@ -236,6 +274,102 @@ You: What's the latest Python version?
 [Results fed back to model]
 Model: The latest Python version is 3.13.0 (released October 2024)
 ```
+
+---
+
+## Feature Plans: Prebuilt Agents & Skills
+
+*These features are planned for future versions.*
+
+### Prebuilt Agents
+
+#### Plan Agent
+An intelligent agent that analyzes complex tasks and creates detailed execution plans. Breaks down goals into manageable steps with clear dependencies.
+
+#### Executor Agent
+Takes a pre-made plan and executes it step-by-step. Can call tools, run terminal commands, and interact with files to complete the task.
+
+#### Auto Mode
+The most autonomous option - the model:
+1. **Plans**: Analyzes the task and creates a plan
+2. **Confirms**: Shows you the plan and asks for confirmation
+3. **Executes**: Once confirmed, carries out the plan automatically
+
+### Skills System
+Reusable prompt templates for common tasks:
+- **Code Review**: Analyze code for bugs and improvements
+- **Documentation**: Generate documentation from code
+- **Refactoring**: Suggest and apply code improvements
+- **Testing**: Create test cases for functions
+- **Debugging**: Help identify and fix bugs
+
+Skills can be invoked with commands like `/skill review` or `/skill test`.
+
+---
+
+## Future Features
+
+### API Integration (In Development)
+- **OpenAI**: GPT-4o, GPT-4o-mini, GPT-4 Turbo
+- **Anthropic**: Claude 3.5 Sonnet, Claude 3 Haiku
+- **Google**: Gemini 1.5 Pro, Gemini 1.5 Flash
+- Unified model selection across all providers
+
+### TUI Interface Alternative
+A full-screen Textual-based TUI interface with:
+- Rich panels and tables
+- Keyboard navigation
+- Mouse support
+- Smooth animations
+- Alternative to the CLI menu-based interface
+
+---
+
+## Change Log: 0.0.1 (Alpha) → 0.1.4
+
+| Feature | 0.0.1 (Alpha) | 0.1.4 |
+|---------|---------------|-------|
+| **Model Registry** | ~15 models | **104 models** |
+| **Memory System** | Not implemented | **Full** (per-model + global + auto-extract) |
+| **Tool-Calling** | Not implemented | **6 tools** (terminal, file ops, web search, file search) |
+| **Chat History** | Basic | **Full** with session management and browsing |
+| **Hardware Scanner** | Basic GPU detection | **Full** (GPU, CPU, RAM, Disk, VRAM filtering, speed estimation) |
+| **Model Categories** | None | **Small/Medium/Large/XLarge** |
+| **Capability Badges** | None | **Tool Calling, Code, Reasoning, Multilingual** |
+| **Context Length** | Fixed at 2048 | **Configurable** per session |
+
+### What's New in 0.1.4
+
+#### Hardware Scanner
+- Complete hardware detection (GPU, CPU, RAM, Disk)
+- VRAM-based model filtering and sorting
+- Inference speed estimation
+- Model recommendations based on your hardware
+
+#### Memory System
+- Per-model memory files (`~/.aihub/memory/<model>.md`)
+- Global memory shared across models
+- AI-powered auto-extraction from conversations
+- Slash commands: `/memory`, `/memory save`, `/memory clear`
+
+#### Tool-Calling
+- 6 built-in tools for agentic workflows
+- Automatic tool execution based on model decisions
+- Safety warnings for dangerous commands
+- Tool timeout configuration
+
+#### Model Browser
+- 104 models in registry
+- Category filtering (Small/Medium/Large/XLarge)
+- Capability badges display
+- Hardware-aware sorting
+- Installed models highlighted
+
+#### Chat Improvements
+- Configurable context length
+- Temperature control
+- Streaming responses
+- Session persistence
 
 ---
 
