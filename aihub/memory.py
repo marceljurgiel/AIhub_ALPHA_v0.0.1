@@ -143,9 +143,9 @@ def extract_and_update_memory(model_name: str, messages: list, target: str = "ch
     if not chat_history:
         return "Error: No conversation history to extract from."
         
-    # Format the history for the model (last 15 messages for depth)
+    # Format the history for the model (last 30 messages for depth)
     formatted_history = ""
-    for m in chat_history[-15:]:
+    for m in chat_history[-30:]:
         role = "User" if m["role"] == "user" else "Assistant"
         formatted_history += f"{role}: {m['content']}\n"
         

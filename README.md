@@ -75,7 +75,7 @@ During chat, use these commands to manage memory:
 #### How Auto-Extraction Works (`/memoryadd`)
 When you use `/memoryadd chat` or `/memoryadd global`:
 
-1. **Collection**: AIHub collects the last 15 messages from your current chat session
+1. **Collection**: AIHub collects the last 30 messages from your current chat session
 2. **Analysis**: It sends these messages to your currently active local Ollama model with a special prompt asking it to extract key facts, user preferences, and important information
 3. **Summarization**: The model analyzes the conversation and creates a clean Markdown list of the most important points
 4. **Saving**: The extracted facts are saved to either:
