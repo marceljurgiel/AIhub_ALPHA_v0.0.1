@@ -11,15 +11,15 @@ from .config import config
 
 # ── Capability emoji badges ───────────────────────────────────────────────────
 CAPABILITY_BADGES = {
-    "tool calling":        ":wrench: Tool Calling",
-    "function calling":    ":gear: Func Calls",
-    "agents":              ":robot: Agents",
-    "code":                ":computer: Code",
-    "reasoning":           ":brain: Reasoning",
-    "multilingual":        ":globe_with_meridians: Multilingual",
-    "long context":        ":page_facing_up: Long Context",
-    "rag":                 ":magnifying_glass_tilted_right: RAG",
-    "instruction following": ":white_check_mark: Instruct",
+    "tool calling":        "Tool Calling",
+    "function calling":    "Func Calls",
+    "agents":              "Agents",
+    "code":                "Code",
+    "reasoning":           "Reasoning",
+    "multilingual":        "Multilingual",
+    "long context":        "Long Context",
+    "rag":                 "RAG",
+    "instruction following": "Instruct",
 }
 
 # ── Speed category colors / labels ───────────────────────────────────────────
@@ -31,10 +31,10 @@ SPEED_COLORS = {
 }
 
 SPEED_LABELS = {
-    "very fast": ":zap: Very Fast",
-    "fast":      ":rocket: Fast",
-    "medium":    ":arrows_counterclockwise: Medium",
-    "slow":      ":snail: Slow",
+    "very fast": "Very Fast",
+    "fast":      "Fast",
+    "medium":    "Medium",
+    "slow":      "Slow",
 }
 
 # ── Size categories ────────────────────────────────────────────────────────────

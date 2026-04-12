@@ -451,11 +451,11 @@ def handle_model_action(model: dict, local_names: set):
         f"[bold white]{model['name']}[/bold white]  {installed_badge}  [dim]({src_label})[/dim]\n"
         f"[dim]─────────────────────────────────────────────────────[/dim]\n"
         f"[dim]{desc}[/dim]\n\n"
-        f"  :floppy_disk: [dim]Size:[/dim]     [cyan]{size_info}[/cyan]\n"
-        f"  :desktop_computer:  [dim]RAM req.:[/dim]  [cyan]{ram_info}[/cyan]\n"
-        f"  :zap: [dim]Speed:[/dim]    [{speed_col}]{speed_lbl}[/{speed_col}]\n"
-        f"  :page_facing_up: [dim]Context:[/dim]  [cyan]{ctx_str}[/cyan]\n"
-        f"  :label:  [dim]Category:[/dim] [bold cyan]{category}[/bold cyan]\n\n"
+        f"  [dim]Size:[/dim]     [cyan]{size_info}[/cyan]\n"
+        f"  [dim]RAM req.:[/dim]  [cyan]{ram_info}[/cyan]\n"
+        f"  [dim]Speed:[/dim]    [{speed_col}]{speed_lbl}[/{speed_col}]\n"
+        f"  [dim]Context:[/dim]  [cyan]{ctx_str}[/cyan]\n"
+        f"  [dim]Category:[/dim] [bold cyan]{category}[/bold cyan]\n\n"
         f"  {badge_str}\n\n"
         f"  [dim]Use cases:[/dim] [#a78bfa]{use_cases}[/#a78bfa]"
     )
@@ -469,10 +469,10 @@ def handle_model_action(model: dict, local_names: set):
 
     # ── Build actions ─────────────────────────────────────────────────────────
     actions = []
-    actions.append(questionary.Choice("💬  Start Chat", value="chat"))
+    actions.append(questionary.Choice("Start Chat", value="chat"))
 
     if not installed and not is_api:
-        actions.append(questionary.Choice("⬇️  Download Model (Ollama)", value="download"))
+        actions.append(questionary.Choice("Download Model (Ollama)", value="download"))
 
     if installed and not is_api:
         sessions = list_sessions(model["name"])
