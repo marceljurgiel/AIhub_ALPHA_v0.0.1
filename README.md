@@ -132,44 +132,44 @@ Tools work with Ollama models that support function calling (e.g., llama3.2:3b, 
 ### Main Menu
 The main entry point to AIHub with all available options.
 
-![Main Menu](/screenshots/Main_menu.png){width=600}
+![Main Menu](/screenshots/Main_menu.png)
 
 ### Model Browser
 Browse, filter, and manage available models with hardware compatibility.
 
-![Browse & Manage Models](/screenshots/Browse_and_manage_models.png){width=600}
-![Model Selection](/screenshots/Model_selection_menu.png){width=600}
-![Model Details](/screenshots/Model_chat_details.png){width=600}
+![Browse & Manage Models](/screenshots/Browse_and_manage_models.png)
+![Model Selection](/screenshots/Model_selection_menu.png)
+![Model Details](/screenshots/Model_chat_details.png)
 
 ### Model Download
 Download new models directly from Ollama registry.
 
-![Model Download](/screenshots/model_download_pull.png){width=600}
+![Model Download](/screenshots/model_download_pull.png)
 
 ### Hardware Scanner
 Automatic hardware detection with model recommendations.
 
-![Hardware Diagnostics](/screenshots/Hardware_Diagnostics.png){width=600}
+![Hardware Diagnostics](/screenshots/Hardware_Diagnostics.png)
 
 ### Memory System
 AI-powered memory system that allows models to remember information.
 
-![Memory Basic](/screenshots/memory_working_example.png){width=600}
-![Memory Feature](/screenshots/memory_feature_working_example.png){width=600}
-![Memory Auto-Extract](/screenshots/memory_add_auto_extraxt_working_example.png){width=600}
-![Memory Clear](/screenshots/memory_clear.png){width=600}
-![Memory Settings](/screenshots/Memory_managment_settings_menu.png){width=600}
+![Memory Basic](/screenshots/memory_working_example.png)
+![Memory Feature](/screenshots/memory_feature_working_example.png)
+![Memory Auto-Extract](/screenshots/memory_add_auto_extraxt_working_example.png)
+![Memory Clear](/screenshots/memory_clear.png)
+![Memory Settings](/screenshots/Memory_managment_settings_menu.png)
 
 ### Chat History
 Browse and resume past conversations.
 
-![History List](/screenshots/chat_history_current_model_list.png){width=600}
-![History View](/screenshots/model_chat_history_view.png){width=600}
+![History List](/screenshots/chat_history_current_model_list.png)
+![History View](/screenshots/model_chat_history_view.png)
 
 ### Configuration
 View and edit AIHub settings.
 
-![Configuration](/screenshots/Confuguration_windows_menu.png){width=600}
+![Configuration](/screenshots/Confuguration_windows_menu.png)
 
 ---
 
