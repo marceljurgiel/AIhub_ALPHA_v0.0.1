@@ -261,12 +261,8 @@ When running `aihub`, you'll see an interactive menu with:
 AIHub stores config at `~/.aihub/config.yaml`:
 
 ```yaml
-# API Settings (in development - not functional yet)
-ollama_api_url: http://localhost:11434
-openai_api_key: your-key-here
-anthropic_api_key: your-key-here
-
 # Model Settings
+ollama_api_url: http://localhost:11434
 default_chat_model: llama3.2:3b
 default_context_length: 2048
 models_registry_path: /path/to/models_registry.json
